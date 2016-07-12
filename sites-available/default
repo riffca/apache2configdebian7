@@ -21,6 +21,16 @@
 		Allow from all
 	</Directory>
 
+	ProxyRequests Off 
+
+	<Proxy *> 
+	Order deny,allow 
+	Allow from all 
+	</Proxy> 
+
+	ProxyPass / http://pliusninaphoto.ru:1100/ 
+	ProxyPassReverse / http://pliusninaphoto.ru:1100/
+
 	ErrorLog ${APACHE_LOG_DIR}/error.log
 
 	# Possible values include: debug, info, notice, warn, error, crit,
