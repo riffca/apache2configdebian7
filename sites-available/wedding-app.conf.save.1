@@ -1,0 +1,39 @@
+#mkdir /home/admin/www/wedding-app/php/public
+#git branch --track origin master; git pull; sudo a2ensite wedding-app.conf; sudo service apache2 restart
+
+listen 1100
+		
+<VirtualHost *:1100>
+
+	ServerAdmin webmaster@localhost
+	DocumentRoot /home/admin/www/wedding-app/php/public
+	<Directory />
+                ServerName pliusninaphoto.ru
+	ServerAlias www.pliusninaphoto.ru
+		Options FollowSymLinks
+		AllowOverride All
+	</Directory>
+	<Directory /home/admin/www/wedding-app/php/public>
+		Options Indexes FollowSymLinks MultiViews
+		AllowOverride All
+		Order allow,deny
+		allow from all
+	</Directory>
+
+	ScriptAlias /cgi-bin/ /usr/lib/cgi-bin/
+	<Directory "/usr/lib/cgi-bin">
+		AllowOverride All
+		Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
+		Order allow,deny
+		Allow from all
+	</Directory>
+
+	ErrorLog /error.log
+
+	# Possible values include: debug, info, notice, warn, error, crit,
+	# alert, emerg.
+	LogLevel warn
+	CustomLog /access.log combined
+
+</VirtualHost>
+
